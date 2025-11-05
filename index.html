@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G. MAKARAJOTHI — Portfolio</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="animated-bg"></div>
+
+  <div class="container">
+    <header class="header">
+      <div class="logo">G. MAKARAJOTHI</div>
+      <nav class="menu">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div class="hero-text">
+        <h1>Hi, I'm <span class="highlight">G. MAKARAJOTHI</span></h1>
+        <p class="lead">Aspiring web developer building clean, responsive interfaces and interactive projects. I enjoy learning new web technologies and solving problems with code.</p>
+
+        <div class="buttons">
+          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-outline" href="#contact">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">GM</div>
+    </main>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="card project">
+          <h3>Portfolio Website</h3>
+          <p>Responsive personal portfolio built with HTML, CSS and JS.</p>
+        </div>
+        <div class="card project">
+          <h3>Todo App</h3>
+          <p>Interactive todo list with localStorage and dynamic UI.</p>
+        </div>
+        <div class="card project">
+          <h3>College Project</h3>
+          <p>Dashboard for visualizing student performance and analytics.</p>
+        </div>
+        <div class="card project">
+          <h3>Web Game Prototype</h3>
+          <p>Small JavaScript game demonstrating logic and animations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>I am G. MAKARAJOTHI — passionate about front-end development, UI/UX and building projects that people love to use. I like to keep designs clean and interactions intuitive.</p>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skills">
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">React</span>
+        <span class="chip">Git</span>
+        <span class="chip">UI/UX</span>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-card">
+      <h2>Get in Touch</h2>
+      <p>Send me a message — I’d love to collaborate or chat about projects.</p>
+      <form onsubmit="alert('Thanks! Your message was received.'); return false;">
+        <input type="text" placeholder="Your name" required>
+        <input type="email" placeholder="Your email" required>
+        <textarea placeholder="Message" rows="4"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <footer class="footer">
+      Built with ❤ — G. MAKARAJOTHI • <span id="year"></span>
+    </footer>
+  </div>
+
+  <!-- Optional light matrix + typing scripts -->
+  <canvas id="matrix"></canvas>
+
+  <script>
+    // small matrix background (light)
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = new Array(columns).fill(1);
+
+    function drawMatrix(){
+      ctx.fillStyle = 'rgba(179,217,255,0.05)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#003366';
+      ctx.font = fontSize + 'px monospace';
+      columns = Math.floor(canvas.width / fontSize);
+      if (drops.length !== columns) drops = new Array(columns).fill(1);
+      for (let i=0;i<columns;i++){
+        const text = letters.charAt(Math.floor(Math.random()*letters.length));
+        ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+        if (drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 60);
+
+    // set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
